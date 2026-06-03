@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成田 AEON Mall 美食・購物指南</title>
+  <meta name="description" content="AEON MALL Narita 美食、優惠券、藥妝與伴手禮店家整理">
+  <style>
+    :root {
+      --bg: #f8f5ef;
+      --card: #ffffff;
+      --text: #1c1917;
+      --muted: #78716c;
+      --orange: #ea580c;
+      --orange-dark: #c2410c;
+      --orange-soft: #ffedd5;
+      --border: rgba(28,25,23,.08);
+      --shadow: 0 8px 28px rgba(28,25,23,.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; }
+    .hero {
+      background: linear-gradient(135deg, #ffedd5, #fff7ed 55%, #fff);
+      padding: 36px 20px 30px;
+    }
+    .container {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.8);
+      color: #c2410c;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(28,25,23,.06);
+    }
+    h1 {
+      font-size: clamp(34px, 8vw, 62px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin: 22px 0 14px;
+    }
+    .subtitle {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 760px;
+      font-size: 17px;
+      margin: 0;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(248,245,239,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(28,25,23,.05);
+      padding: 14px 20px;
+      overflow: visible;
+    }
+    .search-wrap {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+      overflow: visible;
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a8a29e;
+      font-size: 18px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid #e7e5e4;
+      border-radius: 18px;
+      background: #fff;
+      padding: 15px 16px 15px 46px;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 1px 4px rgba(28,25,23,.04);
+    }
+    input:focus {
+      border-color: #fdba74;
+      box-shadow: 0 0 0 4px rgba(251,146,60,.18);
+    }
+    .category-select-wrap {
+      display: block;
+      margin-top: 12px;
+    }
+    .category-select {
+      width: 100%;
+      border: 1px solid #e7e5e4;
+      border-radius: 16px;
+      background: white;
+      padding: 13px 14px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #44403c;
+      outline: none;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 12px 0 2px;
+      overflow: visible;
+      max-height: none;
+    }
+    .tab {
+      flex: 0 1 auto;
+      border: 0;
+      border-radius: 999px;
+      background: white;
+      color: #57534e;
+      padding: 10px 13px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 5px rgba(28,25,23,.04);
+      white-space: nowrap;
+    }
+    .tab.active {
+      background: var(--orange);
+      color: white;
+    }
+    .category-hint {
+      margin-top: 8px;
+      color: #a8a29e;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    @media (max-width: 520px) {
+      .tabs {
+        max-height: none;
+        padding-top: 10px;
+      }
+      .tab {
+        font-size: 13px;
+        padding: 9px 11px;
+      }
+    }
+    main {
+      padding: 26px 20px 46px;
+    }
+    .summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 22px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 12px rgba(28,25,23,.04);
+    }
+    .summary strong { color: var(--orange); font-size: 30px; }
+    .section {
+      margin: 34px 0 42px;
+    }
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .iconbox {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--orange-soft);
+      color: var(--orange-dark);
+      font-size: 22px;
+      flex: 0 0 auto;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(22px, 5vw, 30px);
+      letter-spacing: -0.02em;
+    }
+    .count { margin: 3px 0 0; color: var(--muted); font-size: 14px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 16px;
+    }
+    @media (min-width: 720px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { padding: 54px 36px 44px; }
+      main { padding-inline: 36px; }
+      .toolbar { padding-inline: 36px; }
+    }
+    @media (min-width: 1040px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .card {
+      overflow: hidden;
+      border-radius: 26px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 3px 15px rgba(28,25,23,.045);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .media {
+      height: 180px;
+      position: relative;
+      background: #fff7ed;
+      overflow: hidden;
+    }
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--orange);
+      gap: 8px;
+      font-weight: 800;
+      text-align: center;
+      padding: 18px;
+    }
+    .placeholder .big { font-size: 40px; }
+    .floor {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #44403c;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
+    .content { padding: 18px; }
+    h3 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+    .label {
+      margin: 0 0 3px;
+      color: #a8a29e;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .value {
+      margin: 0 0 12px;
+      color: #57534e;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .button {
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 12px 14px;
+      margin-top: 2px;
+    }
+    .button:hover { background: var(--orange-dark); }
+    .empty {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px 20px;
+      text-align: center;
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 34px;
+      background: #1c1917;
+      color: #fff;
+      border-radius: 28px;
+      padding: 24px;
+      line-height: 1.8;
+    }
+    footer p { margin: 8px 0 0; color: #d6d3d1; }
+    .source {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #a8a29e;
+    }
+    .source a { color: #fdba74; }
+
+    /* 手機版：只保留下拉選單，隱藏一整排分類按鈕，避免卡住畫面 */
+    @media (max-width: 720px) {
+      .toolbar {
+        padding: 10px 14px 12px;
+      }
+      .search-wrap {
+        max-width: 100%;
+      }
+      .category-select-wrap {
+        display: block;
+        margin-top: 10px;
+      }
+      .tabs {
+        display: none !important;
+      }
+      .category-hint {
+        display: none !important;
+      }
+      input {
+        padding: 13px 14px 13px 42px;
+        border-radius: 18px;
+      }
+      .category-select {
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+      main {
+        padding-top: 18px;
+      }
+    }
+
+    /* 電腦版：保留下拉選單 + 分類按鈕，分類按鈕可換行 */
+    @media (min-width: 721px) {
+      .category-select-wrap {
+        display: block;
+      }
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        overflow: visible;
+        max-height: none;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="pill">📍 AEON MALL Narita｜Food & Shopping Guide</div>
+      <h1>成田 AEON Mall<br>美食・購物指南</h1>
+      <p class="subtitle">整合美食、優惠券、藥妝與伴手禮店家。可用分類按鈕快速篩選，也可以直接搜尋「拉麵、藥妝、MUJI、優惠券、2F」。</p>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input id="search" type="search" placeholder="搜尋店家、食物種類、推薦用途或樓層……" autocomplete="off">
+      <div class="category-select-wrap">
+        <select id="categorySelect" class="category-select" aria-label="選擇分類"></select>
+      </div>
+      <div id="tabs" class="tabs"></div>
+      <div class="category-hint">提示：可用下拉選單或分類按鈕切換；手機版會自動隱藏分類按鈕，避免佔用畫面。</div>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <div class="summary">
+        <div>
+          <div style="font-weight:800;">目前顯示</div>
+          <div style="color:var(--muted);font-size:14px;">可用分類或搜尋縮小結果</div>
+        </div>
+        <div><strong id="count">0</strong> 個項目</div>
+      </div>
+      <div id="results"></div>
+      <footer>
+        <strong>使用建議</strong>
+        <p>購物前建議先點「優惠券／免稅資訊」確認可用折扣；伴手禮與日用品可看 MUJI、DAISO、3COINS+plus；藥妝與保養品可看 KoKuMin、FANCL、DHC、THE BODY SHOP、LUSH。</p>
+        <p class="source">資料整理來源：<a href="https://tw.aeonmall.global/mall/narita" target="_blank" rel="noreferrer">AEON MALL Narita 官方網站</a>、<a href="https://tw.aeonmall.global/mall/narita/food-drink" target="_blank" rel="noreferrer">餐飲頁面</a>、<a href="https://tw.aeonmall.global/mall/narita/coupons" target="_blank" rel="noreferrer">優惠券頁面</a>。實際營業資訊、優惠期限與適用條件以官方現場資訊為準。</p>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const DATA = {"categories": ["全部", "優惠券／免稅資訊", "飲料／咖啡／果汁", "日式正餐／丼飯／豬排／鍋物", "拉麵／烏龍麵／餃子／中華料理", "義式／西式／家庭餐廳／速食", "泰式／東南亞／韓式／清真印度料理", "甜點／冰品／可麗餅／巧克力", "日式和菓子／伴手禮點心", "吃到飽／多人聚餐", "藥妝／美妝", "生活雜貨／伴手雜貨"], "items": [{"category": "優惠券／免稅資訊", "name": "¥500優惠券", "type": "折扣優惠券", "recommend": "消費滿 ¥5,500 才可使用、每人每日限兌換一次。", "floor": "官方優惠券", "link": "https://tw.aeonmall.global/coupons/discount?couponid=22&mall=mall09"}, {"category": "優惠券／免稅資訊", "name": "HappyCoupon 五折優惠", "type": "超市優惠券", "recommend": "於超市使用、掃描優惠券條碼即可自動享有 5% 折扣、部分商品不適用。", "floor": "官方優惠券", "link": "https://tw.aeonmall.global/mall/narita/coupons/652"}, {"category": "優惠券／免稅資訊", "name": "JEWELRY TSUTSUMI", "type": "飾品優惠券", "recommend": "飾品、店內所有商品皆享 5 折優惠。", "floor": "官方優惠券", "link": "https://tw.aeonmall.global/mall/narita/coupons/811"}, {"category": "優惠券／免稅資訊", "name": "Owndays", "type": "太陽眼鏡優惠券", "recommend": "適用對象：價值 6,000 日圓（含稅）以上的 OWNDAYS 原創太陽眼鏡。", "floor": "官方優惠券", "link": "https://tw.aeonmall.global/mall/narita/coupons/80"}, {"category": "飲料／咖啡／果汁", "name": "STARBUCKS COFFEE", "type": "咖啡、輕食", "recommend": "拿鐵、季節限定飲品、蛋糕／三明治", "floor": "1F[130]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_5.jpg%3F20251028&w=750"}, {"category": "飲料／咖啡／果汁", "name": "TULLY'S COFFEE with U", "type": "咖啡、輕食", "recommend": "咖啡、拿鐵、熱壓三明治／甜點", "floor": "1F[103]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_37.jpg%3F20251028&w=750"}, {"category": "飲料／咖啡／果汁", "name": "Gong cha", "type": "手搖飲、珍珠奶茶", "recommend": "珍珠奶茶、黑糖珍珠鮮奶、奶蓋茶", "floor": "1F[151]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_429.jpg%3F20251028&w=750"}, {"category": "飲料／咖啡／果汁", "name": "Wonder Fruits", "type": "果汁、冰沙", "recommend": "新鮮水果汁、綜合水果冰沙", "floor": "1F[146]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_315.jpg%3F20251028&w=750"}, {"category": "飲料／咖啡／果汁", "name": "KALDI COFFEE FARM", "type": "咖啡豆、進口食品", "recommend": "咖啡豆、即沖咖啡、進口零食", "floor": "1F[100]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_351.jpg%3F20251030&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "Ohitsugohan SHIROKUJICHU", "type": "日式飯食、丼飯、茶泡飯類", "recommend": "海鮮丼、雞肉丼、茶泡飯套餐", "floor": "1F[124]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_28.jpg%3F20251028&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "Shabuyo", "type": "涮涮鍋、吃到飽", "recommend": "豬肉／牛肉涮涮鍋、蔬菜吧", "floor": "1F[125]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_321.jpg%3F20251028&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "TONKATSU WAKO", "type": "日式炸豬排", "recommend": "炸豬排定食、腰內肉豬排", "floor": "1F[132]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_410.jpg%3F20251028&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "ginza souzaiten", "type": "日式熟食、便當／惣菜", "recommend": "炸物、熟食拼盤、便當類", "floor": "1F[131]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_394.jpg%3F20251028&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "Nikuhan", "type": "肉類料理", "recommend": "肉丼、烤肉類餐點", "floor": "1F[143]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_453.jpg&w=750"}, {"category": "日式正餐／丼飯／豬排／鍋物", "name": "WAKUWAKU HIROBA", "type": "地方食品、熟食、伴手禮", "recommend": "當地農產、熟食、特色食品", "floor": "1F[149]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_431.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "BENITORA GYOZABOU", "type": "中華料理、餃子、麵食", "recommend": "餃子、擔擔麵、麻婆豆腐類", "floor": "1F[133]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_66.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "Tokyo Gyoza Ken", "type": "餃子、中華定食", "recommend": "煎餃、餃子定食、炒飯", "floor": "2F[230-13]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_352.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "Menba Tadokoro Shoten", "type": "拉麵", "recommend": "味噌拉麵、叉燒味噌拉麵", "floor": "2F[230-8]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_415.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "MARUKAME UDON", "type": "烏龍麵", "recommend": "釜揚烏龍麵、炸物、溫／冷烏龍麵", "floor": "2F[230-6]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_426.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "Karamenya Masumoto", "type": "辛麵、拉麵", "recommend": "辛麵、辣味拉麵", "floor": "2F[230-7]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_432.jpg%3F20251028&w=750"}, {"category": "拉麵／烏龍麵／餃子／中華料理", "name": "GINDACO", "type": "章魚燒", "recommend": "原味章魚燒、蔥花章魚燒", "floor": "2F[230-2]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_141.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "Saizeriya", "type": "義式家庭餐廳", "recommend": "焗烤飯、義大利麵、披薩", "floor": "1F[116]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_205.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "Capricciosa Tomato & Garlic", "type": "義大利料理", "recommend": "番茄蒜香義大利麵、披薩", "floor": "1F[129]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_212.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "Gusto", "type": "日式家庭餐廳、洋食", "recommend": "漢堡排、蛋包飯、兒童餐", "floor": "1F[126]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_455.png%3F20251216&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "BURGER KING", "type": "漢堡、速食", "recommend": "華堡、薯條、套餐", "floor": "1F[170]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_368.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "McDonalds", "type": "漢堡、速食", "recommend": "漢堡、薯條、咖啡、兒童餐", "floor": "2F[230-4]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_140.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "TEXAS KING STEAK", "type": "牛排、鐵板料理", "recommend": "牛排、漢堡排、鐵板套餐", "floor": "2F[230-9]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_405.jpg%3F20251028&w=750"}, {"category": "義式／西式／家庭餐廳／速食", "name": "Yakiniku & Hamburg Steak KOBE USHI-EMON", "type": "燒肉、漢堡排", "recommend": "燒肉飯、漢堡排、牛肉料理", "floor": "2F[230-5]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_403.jpg%3F20251028&w=750"}, {"category": "泰式／東南亞／韓式／清真印度料理", "name": "KEAWJAI", "type": "泰式料理", "recommend": "打拋飯、泰式炒河粉、酸辣湯類", "floor": "1F[127]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_76.jpg%3F20251028&w=750"}, {"category": "泰式／東南亞／韓式／清真印度料理", "name": "INASEAN", "type": "東南亞料理", "recommend": "印尼／東南亞風味飯食、麵食", "floor": "2F[230-11]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_244.jpg%3F20251028&w=750"}, {"category": "泰式／東南亞／韓式／清真印度料理", "name": "Bibinba & Reimen", "type": "韓式料理", "recommend": "石鍋拌飯、冷麵", "floor": "2F[230-10]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_449.jpg%3F20251028&w=750"}, {"category": "泰式／東南亞／韓式／清真印度料理", "name": "HALAL DOSA BIRYANI", "type": "清真、印度料理", "recommend": "Biryani 香料飯、Dosa、咖哩類", "floor": "2F[230-3]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_355.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "GODIVA", "type": "巧克力、甜點飲品", "recommend": "巧克力、巧克力飲品、霜淇淋", "floor": "1F[101]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_438.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Beard Papa", "type": "泡芙", "recommend": "原味泡芙、季節限定泡芙", "floor": "1F[147]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_452.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Dipper Dan", "type": "可麗餅", "recommend": "水果鮮奶油可麗餅、巧克力香蕉可麗餅", "floor": "2F[250]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_139.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Baskin-Robbins 31 ICE CREAM", "type": "冰淇淋", "recommend": "雙球冰淇淋、季節限定口味", "floor": "2F[230-1]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_143.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "D’s sweet Marche", "type": "甜點、點心", "recommend": "甜點小食、伴手點心", "floor": "2F[230-12]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_247.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Ginza Cozy Corner", "type": "蛋糕、洋菓子", "recommend": "草莓蛋糕、泡芙、蛋糕捲", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_393.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "FACTORY Shin", "type": "洋菓子、蛋糕", "recommend": "蛋糕、烘焙甜點", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_381.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "La Clémentine", "type": "洋菓子", "recommend": "蛋糕、法式甜點", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_387.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "BOUL'MICH", "type": "洋菓子", "recommend": "瑪德蓮、費南雪、蛋糕禮盒", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_388.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "colombin", "type": "洋菓子", "recommend": "餅乾、蛋糕、伴手禮", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_389.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Mary's Chocolate", "type": "巧克力", "recommend": "巧克力禮盒", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_384.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "Ciappucchino", "type": "甜點、烘焙點心", "recommend": "杯子蛋糕、烘焙甜點", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_382.jpg%3F20251028&w=750"}, {"category": "甜點／冰品／可麗餅／巧克力", "name": "ROKUMEIKAN", "type": "果凍、洋菓子", "recommend": "水果果凍、禮盒", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_390.jpg&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "EITARO Sohonpo", "type": "日式和菓子", "recommend": "羊羹、和菓子禮盒", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_377.jpg&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "TOKYO PEASEN", "type": "米菓、仙貝類點心", "recommend": "豆菓子、米菓、伴手禮", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_378.jpg%3F20251028&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "NAGOMI-YONEYA", "type": "和菓子", "recommend": "最中、饅頭、羊羹類", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_383.jpg%3F20251028&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "Mankaso", "type": "和菓子、日式點心", "recommend": "日式點心禮盒", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_391.jpg%3F20251028&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "Nihonbashiya Choube", "type": "和菓子", "recommend": "和菓子、季節限定點心", "floor": "1F", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_392.jpg%3F20251028&w=750"}, {"category": "日式和菓子／伴手禮點心", "name": "anko no yamaka", "type": "紅豆點心", "recommend": "紅豆餡點心、和菓子", "floor": "1F[148]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_406.jpg%3F20251028&w=750"}, {"category": "吃到飽／多人聚餐", "name": "BUFFET & DESSERT DeLICiEUX", "type": "自助餐、甜點吃到飽", "recommend": "熟食自助吧、甜點、沙拉", "floor": "1F[123]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_301.jpg%3F20251028&w=750"}, {"category": "吃到飽／多人聚餐", "name": "Shabuyo", "type": "涮涮鍋吃到飽", "recommend": "肉盤、蔬菜吧、鍋物套餐", "floor": "1F[125]", "image": "https://tw.aeonmall.global/_next/image?q=75&url=https%3A%2F%2F4ltg152e5bckmge3.public.blob.vercel-storage.com%2Fassets%2Fimages%2Fnarita%2Fshops%2Fimg-shops_321.jpg%3F20251028&w=750"}, {"category": "藥妝／美妝", "name": "KoKuMin", "type": "藥妝、生活用品／Tax-Free", "recommend": "適合補買藥妝、保健用品、旅行常備品。", "floor": "2F[217]"}, {"category": "藥妝／美妝", "name": "FANCL", "type": "保養品、健康食品／Tax-Free", "recommend": "適合買保養品、潔顏粉、健康食品。", "floor": "1F[113]"}, {"category": "藥妝／美妝", "name": "DHC", "type": "保養品、健康食品／Tax-Free", "recommend": "適合買卸妝油、保健食品與保養品。", "floor": "1F[112]"}, {"category": "藥妝／美妝", "name": "THE BODY SHOP", "type": "身體保養／Tax-Free", "recommend": "適合買身體乳、護手霜、香氛保養品。", "floor": "1F[168]"}, {"category": "藥妝／美妝", "name": "LUSH", "type": "香氛、沐浴保養／Tax-Free", "recommend": "適合買入浴球、香皂、洗髮餅。", "floor": "2F[267]"}, {"category": "藥妝／美妝", "name": "cos:mura", "type": "韓系美妝／Tax-Free", "recommend": "適合看韓系保養與彩妝。", "floor": "1F[137]"}, {"category": "生活雜貨／伴手雜貨", "name": "MUJI", "type": "生活雜貨、服飾、食品／Tax-Free", "recommend": "適合買旅行用品、文具、零食、收納用品。", "floor": "1F[121]"}, {"category": "生活雜貨／伴手雜貨", "name": "DAISO", "type": "百元雜貨", "recommend": "適合買文具、小物、旅行消耗品與小伴手禮。", "floor": "1F[182]"}, {"category": "生活雜貨／伴手雜貨", "name": "3COINS+plus", "type": "生活雜貨／Tax-Free", "recommend": "適合買收納、廚房用品、可愛小物。", "floor": "1F[167]"}, {"category": "生活雜貨／伴手雜貨", "name": "Afternoon Tea LIVING", "type": "生活雜貨", "recommend": "適合買餐具、香氛、居家雜貨。", "floor": "1F[102]"}, {"category": "生活雜貨／伴手雜貨", "name": "VILLAGE VANGUARD", "type": "雜貨、書籍、角色商品／Tax-Free", "recommend": "適合找有趣小物、角色雜貨、搞怪伴手禮。", "floor": "2F[222]"}, {"category": "生活雜貨／伴手雜貨", "name": "CHARA FIELD", "type": "角色商品", "recommend": "適合買卡通、動漫、角色周邊。", "floor": "2F[243]"}]};
+    let activeCategory = "全部";
+    let query = "";
+
+    const iconMap = {
+      "優惠券／免稅資訊": "🎫",
+      "飲料／咖啡／果汁": "☕",
+      "日式正餐／丼飯／豬排／鍋物": "🍱",
+      "拉麵／烏龍麵／餃子／中華料理": "🍜",
+      "義式／西式／家庭餐廳／速食": "🍔",
+      "泰式／東南亞／韓式／清真印度料理": "🌶️",
+      "甜點／冰品／可麗餅／巧克力": "🍰",
+      "日式和菓子／伴手禮點心": "🍡",
+      "吃到飽／多人聚餐": "🍽️",
+      "藥妝／美妝": "🛍️",
+      "生活雜貨／伴手雜貨": "🏬"
+    };
+
+    function escapeHTML(str) {
+      return String(str || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderCategorySelect() {
+      const select = document.getElementById("categorySelect");
+      if (!select) return;
+      select.innerHTML = DATA.categories.map(cat => `
+        <option value="${escapeHTML(cat)}" ${cat === activeCategory ? "selected" : ""}>
+          ${escapeHTML(cat)}
+        </option>
+      `).join("");
+      select.onchange = () => {
+        activeCategory = select.value;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+    }
+
+    function renderTabs() {
+      const tabs = document.getElementById("tabs");
+      tabs.innerHTML = DATA.categories.map(cat => `
+        <button class="tab ${cat === activeCategory ? "active" : ""}" data-category="${escapeHTML(cat)}">
+          ${escapeHTML(cat)}
+        </button>
+      `).join("");
+      tabs.querySelectorAll(".tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeCategory = btn.dataset.category;
+          render();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    }
+
+    function filteredItems() {
+      const keyword = query.trim().toLowerCase();
+      return DATA.items.filter(item => {
+        const matchCategory = activeCategory === "全部" || item.category === activeCategory;
+        const combined = [item.name, item.category, item.type, item.recommend, item.floor].join(" ").toLowerCase();
+        const matchKeyword = !keyword || combined.includes(keyword);
+        return matchCategory && matchKeyword;
+      });
+    }
+
+    function groupByCategory(items) {
+      return items.reduce((acc, item) => {
+        if (!acc[item.category]) acc[item.category] = [];
+        acc[item.category].push(item);
+        return acc;
+      }, {});
+    }
+
+    function card(item) {
+      const imageHTML = item.image ? `
+        <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.name)} ${escapeHTML(item.type)}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="placeholder" style="display:none;"><span class="big">🖼️</span><span>圖片載入失敗</span></div>
+      ` : `
+        <div class="placeholder">
+          <span class="big">${iconMap[item.category] || "🏬"}</span>
+          <span>${escapeHTML(item.category)}</span>
+        </div>
+      `;
+
+      const linkHTML = item.link ? `
+        <a class="button" href="${escapeHTML(item.link)}" target="_blank" rel="noreferrer">開啟官方優惠券</a>
+      ` : "";
+
+      return `
+        <article class="card">
+          <div class="media">
+            ${imageHTML}
+            <span class="floor">${escapeHTML(item.floor)}</span>
+          </div>
+          <div class="content">
+            <h3>${escapeHTML(item.name)}</h3>
+            <p class="label">分類／類型</p>
+            <p class="value">${escapeHTML(item.type)}</p>
+            <p class="label">推薦用途／提醒</p>
+            <p class="value">${escapeHTML(item.recommend)}</p>
+            ${linkHTML}
+          </div>
+        </article>
+      `;
+    }
+
+    function renderResults() {
+      const list = filteredItems();
+      document.getElementById("count").textContent = list.length;
+      const results = document.getElementById("results");
+      if (list.length === 0) {
+        results.innerHTML = `
+          <div class="empty">
+            <h2>找不到符合的項目</h2>
+            <p>可以改用「咖啡、拉麵、藥妝、MUJI、優惠券、1F、2F」等關鍵字搜尋。</p>
+          </div>
+        `;
+        return;
+      }
+
+      const grouped = groupByCategory(list);
+      const sections = Object.entries(grouped).map(([category, arr]) => `
+        <section class="section">
+          <div class="section-head">
+            <div class="iconbox">${iconMap[category] || "🏬"}</div>
+            <div>
+              <h2>${escapeHTML(category)}</h2>
+              <p class="count">${arr.length} 個項目</p>
+            </div>
+          </div>
+          <div class="grid">
+            ${arr.map(card).join("")}
+          </div>
+        </section>
+      `).join("");
+      results.innerHTML = sections;
+    }
+
+    function render() {
+      renderCategorySelect();
+      renderTabs();
+      renderResults();
+    }
+
+    document.getElementById("search").addEventListener("input", e => {
+      query = e.target.value;
+      renderResults();
+    });
+
+    render();
+  </script>
+</body>
+</html>
